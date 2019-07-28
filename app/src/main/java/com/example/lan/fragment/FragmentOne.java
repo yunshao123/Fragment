@@ -3,7 +3,6 @@ package com.example.lan.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class FragmentOne extends Fragment {
-    private int page=0;
     @BindView(R.id.tvshow)
     TextView tvshow;
     Unbinder unbinder;
@@ -29,7 +27,6 @@ public class FragmentOne extends Fragment {
         View view = inflater.inflate(R.layout.fragment_layout, null);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
-        Log.e("进入fragment---》",page+"");
         return view;
     }
 
@@ -49,10 +46,5 @@ public class FragmentOne extends Fragment {
         }else{
             tvshow.setText("333");
         }
-    }
-
-    public void addData(int i){
-        page=i;
-        Log.e("我是第=====", i+"" );
     }
 }

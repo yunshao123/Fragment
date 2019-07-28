@@ -44,11 +44,9 @@ public class MainActivity extends AppCompatActivity {
         PagerAdapter adapter = new MyAdater(getSupportFragmentManager(),
                 fragments);
         vp.setAdapter(adapter);
-        Log.e("这是第几页===",vp.getCurrentItem()+"");
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("这是第几页===",vp.getCurrentItem()+"");
                 EventBus.getDefault().post(new MessageEvent(vp.getCurrentItem()));
             }
         });
