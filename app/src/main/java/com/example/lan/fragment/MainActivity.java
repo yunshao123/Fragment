@@ -1,9 +1,11 @@
 package com.example.lan.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -73,6 +75,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void doNext(long number) {
                 hProgressbar.setProgress(++progress);
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<String> list=new ArrayList<>();
+                for (int i = 0; i <10 ; i++) {
+                    list.add(i+"");
+                }
+                DialogItemAdapter adapter = new DialogItemAdapter(MainActivity.this ,list);
+
+                AlertDialog alertDialog = new AlertDialog
+                        .Builder(MainActivity.this)
+                        .setSingleChoiceItems(adapter, 0, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //ToastUtil.showToastShort("信息：");
+                                dialog.dismiss();
+                            }
+                        }).create();
+
+                alertDialog.show();
             }
         });
     }
