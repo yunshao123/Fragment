@@ -27,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
     Button btn3;
     @BindView(R.id.vp)
     ViewPager vp;
+    @BindView(R.id.h_progressbar)
+    HorizontalProgressBarWithNumber hProgressbar;
 
+    int progress=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         List<Fragment> fragments = new ArrayList<Fragment>();
 
-        for (int i = 0; i <3 ; i++) {
+        for (int i = 0; i < 3; i++) {
             FragmentOne fragment1 = new FragmentOne();
             fragments.add(fragment1);
-            fragment1.addData(i);
         }
         PagerAdapter adapter = new MyAdater(getSupportFragmentManager(),
                 fragments);
@@ -58,12 +60,19 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int i) {
-              Log.e("到哪个页面了==",i+"");
+                Log.e("到哪个页面了==", i + "");
             }
 
             @Override
             public void onPageScrollStateChanged(int i) {
 
+            }
+        });
+
+        RxTimerUtil.interval(2000, new RxTimerUtil.IRxNext() {
+            @Override
+            public void doNext(long number) {
+                hProgressbar.setProgress(++progress);
             }
         });
     }
