@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -103,6 +104,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void checkBox(){
+        final String[] item = {"a", "b", "c"};
+        final boolean[] selected = {true, false, true};
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("多选列表");
+        builder.setMultiChoiceItems(item, selected, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                Toast.makeText(MainActivity.this, item[which] + isChecked, Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Toast.makeText(MainActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                for (int i = 0; i < selected.length; i++) {
+                    Log.e("hongliang", "" + selected[i]);
+                }
+            }
+        });
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
